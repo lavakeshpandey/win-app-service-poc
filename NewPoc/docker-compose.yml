@@ -1,0 +1,16 @@
+﻿version: '3.9'
+services:
+  newpoc:
+    image: lavaregistry.azurecr.io/newpoc:latest
+    ports:
+      - '5000:5000'
+  datadog:
+    image: lavaregistry.azurecr.io/datadog/agent:latest
+    environment:
+      - DD_API_KEY=aa2c854cd23949b8ce4f089bd2042847
+      - DD_SITE=datadoghq.eu
+      - DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL=true
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/proc/:/host/proc/:ro'
+      - '/sys/fs/cgroup:/host/sys/fs/cgroup:ro'
